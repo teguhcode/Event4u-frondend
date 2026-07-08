@@ -87,7 +87,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             keyboardType: TextInputType.emailAddress,
             onSubmitted: (_) => _doLogin(),
             decoration: const InputDecoration(
-              hintText: 'contoh: maya@ticket.local',
+              hintText: 'contoh: user@gmail.com',
               prefixIcon: Icon(Icons.email_outlined, size: 20),
             ),
           ),

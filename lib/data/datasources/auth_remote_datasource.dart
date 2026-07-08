@@ -25,7 +25,9 @@ class AuthRemoteDatasource {
           'password_confirmation': password,
         },
       );
-      return AuthResponse.fromJson(res.data as Map<String, dynamic>);
+      final auth = AuthResponse.fromJson(res.data as Map<String, dynamic>);
+      await TokenStorage.save(auth.token);
+      return auth;
     } on DioException catch (e) {
       throw ApiException.fromDio(e);
     }

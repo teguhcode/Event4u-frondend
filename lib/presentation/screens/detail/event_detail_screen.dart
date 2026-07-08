@@ -48,7 +48,6 @@ class _EventDetailScreenState extends ConsumerState<EventDetailScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.pageBg,
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 0),
       body: asyncEvent.when(
         loading: () => const Center(
             child: CircularProgressIndicator(color: AppColors.electricBlue)),

@@ -37,18 +37,18 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     return 'Rp$s';
   }
 
-  // Validasi promo lokal — sesuaikan dengan kode promo seeder kamu
+  // Validasi promo lokal sesuai dengan seeder
   void _applyPromo() {
     final code = _promoCtrl.text.trim().toUpperCase();
     setState(() {
-      if (code == 'FLASH10') {
-        _discount = _subtotal * 0.10;
-        _promoApplied = true;
-        _promoMsg = 'Promo FLASH10: diskon 10% (${_rp(_discount)})';
-      } else if (code == 'JUNE15') {
+      if (code == 'SEPTEMBERCERIA') {
         _discount = _subtotal * 0.15;
         _promoApplied = true;
-        _promoMsg = 'Promo JUNE15: diskon 15% (${_rp(_discount)})';
+        _promoMsg = 'Promo SEPTEMBERCERIA: diskon 15% (${_rp(_discount)})';
+      } else if (code == 'CUCIGUDANG') {
+        _discount = _subtotal * 0.10;
+        _promoApplied = true;
+        _promoMsg = 'Promo CUCIGUDANG: diskon 10% (${_rp(_discount)})';
       } else if (code.isEmpty) {
         _promoApplied = false;
         _discount = 0;
@@ -105,7 +105,6 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.pageBg,
-      bottomNavigationBar: const AppBottomNavBar(currentIndex: 0),
       appBar: AppBar(
         title: const Text('Checkout'),
         leading: IconButton(
@@ -148,7 +147,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                     style: GoogleFonts.inter(
                         fontSize: 13, color: AppColors.textPrimary),
                     decoration: InputDecoration(
-                      hintText: 'FLASH10 / JUNE15',
+                      hintText: 'Masukkan kode promo',
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 12),
                       border: OutlineInputBorder(
@@ -222,55 +221,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
                   bold: true, valueColor: AppColors.electricBlue,
                   last: true),
             ])),
-            const SizedBox(height: 12),
 
-            // ── Midtrans Info ─────────────────────────────────────────
-            _Section(title: 'Metode Pembayaran', child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-              Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE6F1FB),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: const Color(0xFF0066FF),
-                        borderRadius: BorderRadius.circular(6)),
-                    child: Text('midtrans',
-                        style: GoogleFonts.inter(
-                            fontSize: 12, fontWeight: FontWeight.w700,
-                            color: Colors.white, letterSpacing: 0.3)),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Pilih QRIS, Virtual Account, GoPay, OVO, atau kartu kredit di halaman pembayaran.',
-                      style: GoogleFonts.inter(
-                          fontSize: 11.5, fontWeight: FontWeight.w500,
-                          color: const Color(0xFF0C447C), height: 1.4),
-                    ),
-                  ),
-                ]),
-              ),
-              if (checkoutState.error != null) ...[
-                const SizedBox(height: 10),
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFFEF2F2),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Text(checkoutState.error!,
-                      style: GoogleFonts.inter(
-                          fontSize: 12, color: AppColors.errorRed)),
-                ),
-              ],
-            ])),
           ]),
         ),
 
